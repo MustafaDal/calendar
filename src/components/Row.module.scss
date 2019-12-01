@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  flex: 1 1 0%;
+  border-bottom: 1px solid #dadce0;
+
+  > :first-child {
+    border-left: 1px solid #dadce0;
+  }
+}

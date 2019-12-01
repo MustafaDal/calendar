@@ -14,7 +14,7 @@ import {
   EventEdit
 } from './Events'
 import { EVENT_VIEW_MODES } from '../utils/enums'
-import style from './Calendar.module.scss'
+import style from './Cell.module.scss'
 
 const Cell = ({ col, popperRef }) => {
   const { dispatch, state } = useContext(Context)
