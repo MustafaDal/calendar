@@ -1,0 +1,23 @@
+//
+// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f9f9f9;
+}
+
+.test-btn {
+ + div {
+   display: none;
+ }
+
+ &:hover {
+   + div {
+     display: block;
+   }
+ }
+}
