@@ -1,22 +1,21 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useMemo, useContext, useEffect } from 'react'
 import { Manager } from 'react-popper'
 import Header from './Header'
 import Row from './Row'
 import Cell from './Cell'
 import { generateCalendarDates } from '../utils'
+import { Context } from '../reducer'
+import { SET_COL_LIST } from '../reducer/action-types'
 import style from './Calendar.module.scss'
 
 const Calendar = () => {
-  const [activeCol, setActiveCol] = useState(null)
+  const { dispatch, state } = useContext(Context)
   const currentDate = useMemo(() => new Date(), [])
-  const list = useMemo(() => generateCalendarDates(currentDate), [currentDate])
 
-  const setCol = useCallback(
-    col => e => {
-      setActiveCol(col)
-    },
-    []
-  )
+  useEffect(() => {
+    const list = generateCalendarDates(currentDate)
+    dispatch({ type: SET_COL_LIST, payload: list })
+  }, [dispatch, currentDate])
 
   return (
     <Manager>
@@ -24,15 +23,10 @@ const Calendar = () => {
         <Header currentDate={currentDate} />
 
         <div className={style.list}>
-          {list.map((row, rowIndex) => (
+          {state.list.map((row, rowIndex) => (
             <Row key={rowIndex}>
               {row.map(col => (
-                <Cell
-                  key={col.dayeOfMonth}
-                  caption={col.dayeOfMonth}
-                  isPopperVisible={activeCol === col}
-                  showPopper={setCol(col)}
-                />
+                <Cell key={col.id} col={col} />
               ))}
             </Row>
           ))}

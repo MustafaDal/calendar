@@ -1,7 +1,7 @@
 import React from 'react'
 
-const EventItem = ({ children }) => {
-  return <li>{children}</li>
+const EventItem = ({ children, ...props }) => {
+  return <li {...props}>{children}</li>
 }
 
 export default EventItem

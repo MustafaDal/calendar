@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useReducer } from 'react'
+import { Context, initialState, reducer } from './reducer'
 import Calendar from './components/Calendar'
 
 const App = () => {
-  return <Calendar />
+  const [state, dispatch] = useReducer(reducer, initialState)
+  console.log(Context)
+  return (
+    <Context.Provider value={{ state, dispatch }}>
+      <Calendar />
+    </Context.Provider>
+  )
 }
 
 export default App
