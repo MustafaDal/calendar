@@ -6,7 +6,13 @@ import {
   SET_AN_EVENT,
   SET_EVENT_VIEW_MODE
 } from '../reducer/action-types'
-import { EventItem, EventList, EventCreate, EventDetail, EventEdit } from './Events'
+import {
+  EventItem,
+  EventList,
+  EventCreate,
+  EventDetail,
+  EventEdit
+} from './Events'
 import { EVENT_VIEW_MODES } from '../utils/enums'
 import style from './Calendar.module.scss'
 
@@ -15,10 +21,13 @@ const Cell = ({ col, popperRef }) => {
   const events = state.events.filter(event => event.colId === col.id)
 
   const handleColumnClick = e => {
-    dispatch({ type: SET_ACTIVE_COL, payload: col })
+    if (e.target.dataset.type) {
+      dispatch({ type: SET_ACTIVE_COL, payload: col })
+    }
+
     if (e.target.dataset.type === 'box') {
       dispatch({ type: SET_EVENT_VIEW_MODE, payload: EVENT_VIEW_MODES.create })
-    } else {
+    } else if (e.target.dataset.type === 'list-item') {
       dispatch({ type: SET_EVENT_VIEW_MODE, payload: EVENT_VIEW_MODES.detail })
     }
   }
@@ -36,7 +45,11 @@ const Cell = ({ col, popperRef }) => {
 
       <EventList>
         {events.map(event => (
-          <EventItem key={event.id} onClick={handleEventClick(event)}>
+          <EventItem
+            key={event.id}
+            onClick={handleEventClick(event)}
+            data-type="list-item"
+          >
             {event.title}
           </EventItem>
         ))}

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 import { Context } from '../../reducer'
-import { SET_ACTIVE_COL, CREATE_AN_EVENT } from '../../reducer/action-types'
+import { CREATE_AN_EVENT } from '../../reducer/action-types'
 
 const EventCreate = ({ col }) => {
   const { dispatch } = useContext(Context)
@@ -20,8 +20,6 @@ const EventCreate = ({ col }) => {
         content
       }
     })
-
-    dispatch({ type: SET_ACTIVE_COL, payload: null })
   }
 
   return (

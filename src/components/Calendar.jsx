@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Manager } from 'react-popper'
 import Header from './Header'
 import Row from './Row'
@@ -10,8 +10,8 @@ import style from './Calendar.module.scss'
 
 const Calendar = () => {
   const { dispatch, state } = useContext(Context)
-  const currentDate = useMemo(() => new Date(), [])
 
+  const currentDate = state.currentDate
   useEffect(() => {
     const list = generateCalendarDates(currentDate)
     dispatch({ type: SET_COL_LIST, payload: list })
@@ -20,7 +20,7 @@ const Calendar = () => {
   return (
     <Manager>
       <div className={style.container}>
-        <Header currentDate={currentDate} />
+        <Header />
 
         <div className={style.list}>
           {state.list.map((row, rowIndex) => (

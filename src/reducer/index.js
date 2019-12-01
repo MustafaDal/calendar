@@ -8,11 +8,18 @@ export const initialState = {
   events: [],
   event: null,
   eventViewMode: null,
-  activeCol: null
+  activeCol: null,
+  currentDate: new Date()
 }
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case actions.SET_CURRENT_DATE: {
+      return {
+        ...state,
+        currentDate: action.payload
+      }
+    }
     case actions.SET_COL_LIST:
       return {
         ...state,
@@ -32,6 +39,7 @@ export const reducer = (state, action) => {
     case actions.CREATE_AN_EVENT: {
       return {
         ...state,
+        activeCol: null,
         events: [...state.events, action.payload]
       }
     }
@@ -44,6 +52,20 @@ export const reducer = (state, action) => {
         state.events[index] = {
           ...state.events[index],
           ...action.payload
+        }
+      }
+
+      return state
+    }
+    case actions.REMOVE_AN_EVENT: {
+      const index = state.events.findIndex(item => item.id === action.payload)
+
+      if (index > -1) {
+        state.events.splice(index, 1)
+
+        return {
+          ...state,
+          activeCol: null
         }
       }
 

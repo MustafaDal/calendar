@@ -4,7 +4,7 @@ import Calendar from './components/Calendar'
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  console.log(Context)
+
   return (
     <Context.Provider value={{ state, dispatch }}>
       <Calendar />
