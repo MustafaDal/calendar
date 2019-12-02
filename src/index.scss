@@ -10,14 +10,31 @@ body {
   background: #f9f9f9;
 }
 
-.test-btn {
- + div {
-   display: none;
- }
+button {
+  background-color: #008cba; /* Green */
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
- &:hover {
-   + div {
-     display: block;
-   }
- }
+.text-center {
+  text-align: center;
+}
+
+input[type='text'],
+select,
+textarea {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
 }

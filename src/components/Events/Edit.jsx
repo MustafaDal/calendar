@@ -1,6 +1,7 @@
-import React, { Fragment, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Context } from '../../reducer'
 import { SET_ACTIVE_COL, UPDATE_AN_EVENT } from '../../reducer/action-types'
+import style from './Common.module.scss'
 
 const EventCreate = () => {
   const { state, dispatch } = useContext(Context)
@@ -23,8 +24,8 @@ const EventCreate = () => {
   }
 
   return (
-    <Fragment>
-      <h3>Create an Event</h3>
+    <div className={style.box}>
+      <h3 className={style.title}>Create an Event</h3>
       <div>
         <input
           type="text"
@@ -37,6 +38,7 @@ const EventCreate = () => {
       <div>
         <textarea
           placeholder="Content"
+          rows="3"
           value={content}
           onChange={e => setContent(e.target.value)}
         />
@@ -45,7 +47,7 @@ const EventCreate = () => {
       <button type="button" onClick={handleClick}>
         Update
       </button>
-    </Fragment>
+    </div>
   )
 }
 

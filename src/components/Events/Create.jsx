@@ -1,7 +1,8 @@
-import React, { Fragment, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 import { Context } from '../../reducer'
 import { CREATE_AN_EVENT } from '../../reducer/action-types'
+import style from './Common.module.scss'
 
 const EventCreate = ({ col }) => {
   const { dispatch } = useContext(Context)
@@ -23,8 +24,8 @@ const EventCreate = ({ col }) => {
   }
 
   return (
-    <Fragment>
-      <h3>Create an Event</h3>
+    <div className={style.box}>
+      <h3 className={style.title}>Create an Event</h3>
       <div>
         <input
           type="text"
@@ -37,6 +38,7 @@ const EventCreate = ({ col }) => {
       <div>
         <textarea
           placeholder="Content"
+          rows="3"
           value={content}
           onChange={e => setContent(e.target.value)}
         />
@@ -45,7 +47,7 @@ const EventCreate = ({ col }) => {
       <button type="button" onClick={handleClick}>
         Send
       </button>
-    </Fragment>
+    </div>
   )
 }
 

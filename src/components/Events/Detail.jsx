@@ -1,10 +1,11 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Context } from '../../reducer'
 import {
   SET_EVENT_VIEW_MODE,
   REMOVE_AN_EVENT
 } from '../../reducer/action-types'
 import { EVENT_VIEW_MODES } from '../../utils/enums'
+import style from './Common.module.scss'
 
 const EventDetail = () => {
   const { state, dispatch } = useContext(Context)
@@ -24,9 +25,9 @@ const EventDetail = () => {
   }
 
   return (
-    <Fragment>
-      <h5>{state.event.title}</h5>
-      <p>{state.event.content}</p>
+    <div className={style.box}>
+      <h3 className={style.title}>{state.event.title}</h3>
+      <p className={style.content}>{state.event.content}</p>
 
       <button type="button" onClick={remove}>
         Delete
@@ -35,7 +36,7 @@ const EventDetail = () => {
       <button type="button" onClick={edit}>
         Edit
       </button>
-    </Fragment>
+    </div>
   )
 }
 

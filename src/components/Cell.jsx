@@ -15,19 +15,22 @@ import {
 } from './Events'
 import { EVENT_VIEW_MODES } from '../utils/enums'
 import style from './Cell.module.scss'
+const styleClose = style.close
 
 const Cell = ({ col, popperRef }) => {
   const { dispatch, state } = useContext(Context)
   const events = state.events.filter(event => event.colId === col.id)
 
-  const handleColumnClick = e => {
-    if (e.target.dataset.type) {
-      dispatch({ type: SET_ACTIVE_COL, payload: col })
-    }
+  const createEvent = () => {
+    dispatch({ type: SET_ACTIVE_COL, payload: col })
+    dispatch({ type: SET_EVENT_VIEW_MODE, payload: EVENT_VIEW_MODES.create })
+  }
 
+  const handleColumnClick = e => {
     if (e.target.dataset.type === 'box') {
-      dispatch({ type: SET_EVENT_VIEW_MODE, payload: EVENT_VIEW_MODES.create })
+      createEvent()
     } else if (e.target.dataset.type === 'list-item') {
+      dispatch({ type: SET_ACTIVE_COL, payload: col })
       dispatch({ type: SET_EVENT_VIEW_MODE, payload: EVENT_VIEW_MODES.detail })
     }
   }
@@ -54,6 +57,12 @@ const Cell = ({ col, popperRef }) => {
           </EventItem>
         ))}
       </EventList>
+
+      <div className="text-center">
+        <button type="button" className={style.create} onClick={createEvent}>
+          +
+        </button>
+      </div>
     </div>
   )
 }
@@ -77,9 +86,11 @@ const CellWithPopper = props => {
         {({ ref, style, placement, arrowProps }) => (
           <div ref={ref} style={style} data-placement={placement}>
             <div ref={arrowProps.ref} style={arrowProps.style} />
-            <button type="button" onClick={handleClose}>
-              Close
-            </button>
+            <button
+              type="button"
+              className={styleClose}
+              onClick={handleClose}
+            ></button>
 
             {state.eventViewMode === EVENT_VIEW_MODES.create && (
               <EventCreate col={props.col} />

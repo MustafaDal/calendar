@@ -33,15 +33,17 @@ const Header = () => {
   return (
     <header className={style.header}>
       <button type="button" onClick={prev}>
-        Prev
+        {'<'}
       </button>
       <button type="button" onClick={next}>
-        Next
+        {'>'}
       </button>
       <button type="button" onClick={today}>
         Today
       </button>
-      <h1>{format(state.currentDate, DATE_MONTH_FORMAT)}</h1>
+      <h1 className={style.title}>
+        {format(state.currentDate, DATE_MONTH_FORMAT)}
+      </h1>
     </header>
   )
 }
